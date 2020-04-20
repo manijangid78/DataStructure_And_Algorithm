@@ -18,6 +18,8 @@ public class Tree{
 		}
 	}		
 	
+	// --------------------Insertion-----------------------
+	
 	public void insert(Node node, int value){
 		while(1==1){
 			if(node.value >= value){
@@ -45,6 +47,7 @@ public class Tree{
 		}
 	}
 	
+	// -------------------------traverse all nodes ----------------------
 	public void treverse(Node node){
 		
 		if(node.left!=null){
@@ -57,6 +60,7 @@ public class Tree{
 		
 	}
 	
+	// -------------------Node Search---------------------------------
 	public Node search(Node node, int value){
 		while(node != null){
 			if(node.value>value){
@@ -72,6 +76,7 @@ public class Tree{
 		return node;
 	}
 	
+	//---------------------- Node Remove Operation ---------------- 
 	public Node remove(Node node,int value){
 		
 		if(node.value > value){
@@ -98,6 +103,8 @@ public class Tree{
 		return node;
 	}
 	
+	
+	// -----------------Height of tree---------------
 	public int height(Node node){
 		
 		if(node == null){
@@ -108,12 +115,15 @@ public class Tree{
 		return Math.max(x,y)+1;
 	}
 	
+	// -------------------Maximum Height between Two Nodes-------------------
 	public int maxheight(Node node){
 		int x = height(node.left);
 		int y = height(node.right);
 		return x+y+1+2;
 	}
 	
+	
+	//--------------------Depth of Tree--------------------
 	public int depth(Node node, int value){
 		int dpt;
 		if(value==node.value||node==null){
@@ -128,6 +138,7 @@ public class Tree{
 		return dpt+1;
 	}
 	
+	// --------------------Minimum Node Value------------
 	public Node min(Node node){
 		int min = node.value;
 		while(node.left!=null){
@@ -139,6 +150,7 @@ public class Tree{
 		return node;
 	}
 	
+	// --------------------Maxmum Node Value------------
 	public Node max(Node node){
 		int max = node.value;
 		while(node.right!=null){
