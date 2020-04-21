@@ -9,7 +9,7 @@
 
 
 
-class Ptrn2 
+class  NumberPatternOdd
 { public static void main(String args[])
    { int no,i,j;
       no=(int)(Math.random()*10);
