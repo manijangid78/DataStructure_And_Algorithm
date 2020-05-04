@@ -1,0 +1,178 @@
+import java.io.*;
+import java.util.*;
+
+class Linked{
+	
+	static class Node{
+		int value;
+		Node next;
+		
+		Node(int value){
+			this.value = value;
+			next = null;
+		}
+		
+	}
+	static Scanner s = new Scanner(System.in);
+	
+	// -- main method --
+	public static void main(String args[]){
+		Node head = new Node(5);
+		int x=1;
+		
+		Linked ls = new Linked();
+		
+		while(x!=0){
+			System.out.println("\nChoose operation:\n 1. Insert A Node at the end\n2. Insertion in Biginning \n3. Insert a node at any location\n4. Delete a node\n5. Traverse\n6. Searching\n");
+			x = s.nextInt();
+			switch(x){
+				//--- Insertion case --
+				case 1:{
+					head = ls.insertNode(head);
+					break;
+				}
+				
+				// ------- Insertion in Biginning --------- *there is no method for it all work of it done here*-----------------
+				case 2:{
+					System.out.println("Enter value of Node : ");
+					int value = s.nextInt();
+					Node node = new Node(value);
+					node.next = head;
+					head = node;
+					break;
+				}
+				
+				// -------------Insert a node at any location-------
+				case 3:{
+					System.out.print("Enter location : ");
+					int location = s.nextInt();
+					System.out.print("Enter Node Value");
+					int value = s.nextInt();
+					head = ls.insertMid(head,value,location);
+					break;
+				}
+				
+				// --- deletion case ---
+				case 4:{
+					System.out.print("Insert Node Value u wanna delete : ");
+					int value = s.nextInt();
+					head = ls.deleteNodeValue(head,value);
+					break;
+				}
+				
+				// -------------------- Traverse in Linked List --------------------
+				case 5:{
+					System.out.println("Elements are : ");
+					ls.traverse(head);
+					break;
+				}
+				
+				//-------------------- Searching A Node---------------------
+				case 6:{
+					System.out.println("Enter element u wanna search : ");
+					int value = s.nextInt();
+					boolean bool = ls.searchNode(head,value);
+					System.out.println(bool);
+					break;
+				}
+			
+				case 7:{
+					System.out.print("Enter Node value u wanna change : ");
+					int oldValue = s.nextInt();
+					System.out.print("Enter Node new Value");
+					int newValue = s.nextInt();
+					head = ls.updateNode(head,oldValue,newValue);
+				}
+			
+				default:{
+					System.out.println("Wrong Input");
+					break;
+				}
+			}
+			ls.traverse(head);
+		}
+	}
+	
+	// -------------------- Insertion in Linked List ---------------
+	public Node insertNode(Node node){
+		if(node==null){
+			node = new Node(s.nextInt());
+		}else{
+			node.next = insertNode(node.next);			
+		}
+		return node;
+	}
+	
+	// --------------------Deletion of LinkedList---------------------
+	public Node deleteNodeValue(Node node, int value){
+		
+		if(node==null){
+			System.out.println("Element not found!!!");
+		}else{
+			if(node.value == value){
+				return node.next;
+			}
+			node.next = deleteNodeValue(node.next,value);
+		}
+		return node;
+	} 
+	
+	//-------------------- Searching A Node---------------------
+	public boolean searchNode(Node node,int value){
+		if(node==null){
+			return false;
+		}else{	
+			if(node.value==value){
+				return true;
+			}	
+			return searchNode(node.next,value);
+		}
+	}
+	
+	// -------------Insert a node at any location-------
+	public Node insertMid(Node node,int value, int location){
+		return insertMidNode(node,value,location-1,1);
+	}
+	public Node insertMidNode(Node node, int value, int location,int count){
+		
+		if(node==null){
+			System.out.println("Location Not found");
+			return node;
+		}
+	    else{
+			if(count==location){
+				Node tempNode = new Node(value);
+				tempNode.next = node.next;
+				node.next = tempNode;
+			}else{
+				node.next = insertMidNode(node.next,value,location,++count);	
+			}
+		}
+		return node;
+	} 
+	
+	// -------------------- Traverse in Linked List --------------------
+	public void traverse(Node head){
+		Node node = head;
+		while(node!=null){
+			System.out.print(node.value+" ");
+			node = node.next;
+		}
+	}
+	
+	// ----------------- Update a node value to new value ----------------------
+	public Node updateNode(Node node,int oldValue,int newValue){
+		
+		if(node==null){
+			System.out.println("Element not found!!!!");
+			return node;
+		}else{	
+			if(node.value==oldValue){
+				node.value = newValue;
+				return node;
+			}	
+			node.next = updateNode(node.next,oldValue,newValue);
+		}
+		return node;
+	}
+}
